@@ -12,8 +12,12 @@ void main() async {
       FlutterError.presentError(details);
       debugPrint('Flutter error: ${details.exception}');
     };
-    await dotenv.load(fileName: ".env");
-    debugPrint('Environment loaded');
+      try {
+      await dotenv.load(fileName: ".env");
+      debugPrint('.env загружен');
+    } catch (_) {
+      debugPrint('.env не найден – используются настройки пользователя');
+    }
     runApp(const MyApp());
   } catch (e, stackTrace) {
     debugPrint('Error starting app: $e');
